@@ -8,7 +8,7 @@ namespace TheSims
 {
     internal class BuildMode
     {
-        public House house = new House();
+        public House House = new House();
         private bool isFirstFloorBuilt = false;
 
         public void BuildMenu()
@@ -51,7 +51,7 @@ namespace TheSims
             Console.Clear();
             Console.WriteLine("You are building the first floor of your house!");
             new House("FirstFloor");
-            house.BuildFloor
+            House.BuildFloor("FirstFloor");
             isFirstFloorBuilt = true;
 
         }
@@ -68,6 +68,7 @@ namespace TheSims
             if (SecoundResponse == "secound")
             {
                 new House("SecoundFloor");
+                House.BuildFloor("SecoundFloor");
             }
             else if (SecoundResponse == "exit")
             {
