@@ -16,11 +16,20 @@ namespace TheSims
         {
             NameOfFurniture = Name;
             InteractWithFurniture = Interact;
+        }
 
+        public Furniture(string Name)
+        {
+            NameOfFurniture = Name;
         }
 
 
         public void UseFurniture()
+        {
+
+        }
+
+        public void AddFurniture()
         {
 
         }

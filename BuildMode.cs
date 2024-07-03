@@ -21,7 +21,8 @@ namespace TheSims
                 Console.WriteLine("\nOptions:");
                 Console.WriteLine("\t1. First floor");
                 Console.WriteLine("\t2. Secound floor");
-                Console.WriteLine("\t3. Exit");
+                Console.WriteLine("\t3. Add furniture to the home");
+                Console.WriteLine("\t4. Exit");
 
                 var BuildingResponse = Console.ReadLine();
                 switch (BuildingResponse)
@@ -40,6 +41,9 @@ namespace TheSims
                         }
                         break;
                     case "3":
+                        House.FurbishHouse(House);
+                        break;
+                    case "4":
                         Building = false;
                         break;
                 }

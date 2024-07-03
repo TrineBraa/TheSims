@@ -11,8 +11,8 @@ namespace TheSims
 {
     internal class House
     {
-        public string _floor;
         public Room room;
+        public string _floor;
         public List<Room> RoomsOnFloor = new List<Room>();
         public House(string Floor)
         {
@@ -34,7 +34,7 @@ namespace TheSims
         };
 
 
-        public List<Room> BuildFloor(string Floor)
+        public void BuildFloor(string Floor)
         {
             _floor = Floor;
             Console.WriteLine($"Welcome to the {_floor}");
@@ -61,7 +61,6 @@ namespace TheSims
 
             }
 
-            return RoomsOnFloor;
         }
 
         public bool AddRoom(string chosenRoom)
@@ -70,6 +69,10 @@ namespace TheSims
             {
                 AddChoosenRoom(chosenRoom);
                 Console.WriteLine("You added a Kitchen to this floor");
+                foreach (var room in RoomsOnFloor)
+                {
+                    Console.WriteLine(room.typeOfRoom);
+                }
                 Console.ReadKey();
                 return true;
             }
@@ -112,18 +115,19 @@ namespace TheSims
 
         private void AddChoosenRoom(string roomType)
         { 
-            var result = Rooms.FirstOrDefault(room => room.typeOfRoom == roomType);
-            if (result != null) RoomsOnFloor.Add(result);
-               RoomsOnFloor.Add(result);
-           
+            var result  = Rooms.Where(room => room.typeOfRoom.ToLower() == roomType);
+            foreach (var room in result)
+            {
+                RoomsOnFloor.Add(room);
+            }
             
         }
 
         public void PrintAddedRooms()
         {
-            foreach (var Room in RoomsOnFloor)
+            foreach (var room in RoomsOnFloor)
             {
-                Console.WriteLine(Room.typeOfRoom);
+                Console.WriteLine(room.typeOfRoom);
             }
         }
 
@@ -134,6 +138,33 @@ namespace TheSims
                 Console.WriteLine(room.typeOfRoom);
             }
         }
+
+        public void FurbishHouse(House house)
+        {
+            while (true)
+            {
+                Console.WriteLine("What floor do you want to furbish?");
+                Console.WriteLine("1. First Floor");
+                Console.WriteLine("2. Secound Floor");
+                Console.WriteLine("3. exit");
+                var Floor = Console.ReadLine();
+                switch (Floor)
+                {
+                    case "1":
+                        room.FurnishRoom("First Floor"), RoomsOnFloor);
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+                        break;
+                    default:
+                        Console.WriteLine("Please choose a valid option!");
+                        break;
+                }
+
+            }
+        }
+
 
     }
 }
