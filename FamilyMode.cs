@@ -27,8 +27,6 @@ namespace TheSims
     }
 
 
-
-
     internal class FamilyMode
     {
         private bool leaveCreating = true;
@@ -101,13 +99,13 @@ namespace TheSims
                 if (creation == "adult")
                 {
                     Console.WriteLine("You are creating an adult sim.");
-                    Thread.Sleep(2000);
+                    Console.ReadKey();
                     CreateAdult();
                 }
                 else if (creation == "child") 
                 {
                     Console.WriteLine("You are creating a child sim.");
-                    Thread.Sleep(2000);
+                    Console.ReadKey();
                     CreateChild();
                 }
                 else if (creation == "exit")
@@ -115,12 +113,13 @@ namespace TheSims
                     Console.WriteLine("You will return to the main menu");
                     Creating = false;
                     leaveCreating = false;
-                    Thread.Sleep(2000);
+                    return List<Sim> Family;
+                    Thread.Sleep(1000);
                 }
                 else
                 {
                     Console.WriteLine("Please choose one of the options given!");
-                    Thread.Sleep(2000);
+                    Thread.Sleep(1000);
                 }
 
             }

@@ -1,10 +1,11 @@
-﻿using TheSims;
+﻿using System.Runtime.CompilerServices;
+using TheSims;
 
 FamilyMode Family = new FamilyMode();
 BuildMode Build = new BuildMode();
 PlayMode Play = new PlayMode();
-
-
+bool Housebuilt = false;
+bool FamilyMade = false;
 
 Main();
 
@@ -34,11 +35,14 @@ void MainMenu()
     {
         case "1":
             Family.CreateFamily(); //Se om det er mulig å komme tilbake hit etter at det er laget en familie og en har forlatt denne kategorien.
+            FamilyMade = true;
             break;
         case "2":
             Build.BuildMenu();
+            Housebuilt = true;
             break;
         case "3":
+            Play.PlayMenu(Housebuilt, FamilyMade);
             break;
         case "4":
             Console.WriteLine("Closing down!");

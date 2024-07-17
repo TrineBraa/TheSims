@@ -9,31 +9,19 @@ namespace TheSims
     internal class Furniture
     {
 
-        public string NameOfFurniture;
+        public string Name;
         public string InteractWithFurniture;
 
-        public Furniture(string Name, string Interact)
+        public Furniture(string name, string Interact)
         {
-            NameOfFurniture = Name;
+            Name = name;
             InteractWithFurniture = Interact;
         }
 
-        public Furniture(string Name)
+        public Furniture(string name)
         {
-            NameOfFurniture = Name;
+            Name = name;
         }
-
-
-        public void UseFurniture()
-        {
-
-        }
-
-        public void AddFurniture()
-        {
-
-        }
-
 
 
 

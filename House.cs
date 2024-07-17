@@ -11,157 +11,99 @@ namespace TheSims
 {
     internal class House
     {
-        public Room room;
-        public string _floor;
-        public List<Room> RoomsOnFloor = new List<Room>();
-        public House(string Floor)
-        {
-            _floor = Floor;
-        }
-
+        public List<Floor> FloorList = new List<Floor>();
+        
         public House()
         {
             
         }
 
-        public List<Room> Rooms = new List<Room>()
-        {
-            new Room ("Kitchen"),
-            new Room ("Livingroom" ),
-            new Room ("Bathroom" ),
-            new Room ("Laundryroom"),
-            new Room ("Bedroom"),
-        };
 
-
-        public void BuildFloor(string Floor)
+        public void HouseMenu()
         {
-            _floor = Floor;
-            Console.WriteLine($"Welcome to the {_floor}");
-            Console.WriteLine("What rooms do you want on this floor?");
-            bool addRooms = true;
-            while (addRooms)
+            Console.WriteLine("Build your house!");
+            Console.WriteLine("What floor do you want to build?");
+            Console.WriteLine("\n1. First floor");
+            Console.WriteLine("2. Second floor");
+            Console.WriteLine("3. Third floor");
+            Console.WriteLine("4. Furbish your house");
+            Console.WriteLine("\n5. Return to the main Menu");
+            var MenuOption = Console.ReadLine();
+            Console.WriteLine();
+            MenuChoices(MenuOption);
+        }
+
+        public void MenuChoices(string MenuOption)
+        {
+            switch (MenuOption)
+            {
+                case "1":
+                    Console.WriteLine("You are building the first floor!");
+                    FloorList.Add(new Floor("First Floor"));
+                    Console.ReadKey();
+                    break;
+                case "2":
+                    Console.WriteLine("You are building the second floor!");
+                    FloorList.Add(new Floor("Second Floor"));
+                    Console.ReadKey();
+                    break;
+                case "3":
+                    Console.WriteLine("You are building the Third floor!");
+                    FloorList.Add(new Floor("Third Floor"));
+                    Console.ReadKey();
+                    break;
+                case "4":
+                    Console.WriteLine("You are furbishing your house!");
+                    ChooseAFloor();
+                    Console.ReadKey();
+                    break;
+                case "5":
+                    Console.WriteLine("You are returning to main menu!");
+                    Thread.Sleep(1000); 
+                    break;
+                default:
+                    Console.WriteLine("Please use a valid input");
+                    break;
+            }
+        }
+
+        public void ChooseAFloor()
+        {
+            while (true)
             {
                 Console.Clear();
-                PrintAvailibleRooms();
-                Console.WriteLine();
-
-                Console.WriteLine("Here are the rooms you have added!");
-                PrintAddedRooms();
-                Console.WriteLine();
-                Console.WriteLine("\n Write the name of the room you want to add, exit when done.");
-                var FormFloor = Console.ReadLine();
-                if (FormFloor == "exit")
+                ShowFloors();
+                Console.WriteLine("What floor do you want to furbish? exit to return to main menu");
+                var FloorChoice = Console.ReadLine();
+                var ChosenFloor = FindFloor(FloorChoice);
+                if (FloorChoice == "exit")
                 {
                     break;
 
                 }
-
-                AddRoom(FormFloor.ToLower());
-
+                ChosenFloor?.ChooseARoom();
             }
-
         }
 
-        public bool AddRoom(string chosenRoom)
+
+        public Floor? FindFloor(string ChosenFloor)
         {
-            if (chosenRoom == "kitchen")
+            foreach (var floor in FloorList)
             {
-                AddChoosenRoom(chosenRoom);
-                Console.WriteLine("You added a Kitchen to this floor");
-                foreach (var room in RoomsOnFloor)
+                if (ChosenFloor.ToLower() == floor.FloorLevel.ToLower())
                 {
-                    Console.WriteLine(room.typeOfRoom);
+                    return floor;
                 }
-                Console.ReadKey();
-                return true;
             }
-            else if (chosenRoom == "bathroom")
-            {
-                AddChoosenRoom(chosenRoom);
-                Console.WriteLine("You added a Bathroom to this floor");
-                Console.ReadKey();
-                return true;
-            }
-            else if (chosenRoom == "livingroom")
-            {
-                AddChoosenRoom(chosenRoom);
-                Console.WriteLine("You added a Livingroom to this floor");
-                Console.ReadKey();
-                return true;
-            }
-            else if (chosenRoom == "laundryroom")
-            {
-                AddChoosenRoom(chosenRoom);
-                Console.WriteLine("You added a Laundryroom to this floor");
-                Console.ReadKey();
-                return true;
-            }
-            else if (chosenRoom == "bedroom")
-            {
-                AddChoosenRoom(chosenRoom);
-                Console.WriteLine("You added a Bedroom to this floor");
-                Console.ReadKey();
-                return true;
-            }
-            else
-            {
-                Console.WriteLine("This is not a valid room");
-                Console.ReadKey();
-                return false;
-            }
+            return null;
         }
 
 
-        private void AddChoosenRoom(string roomType)
-        { 
-            var result  = Rooms.Where(room => room.typeOfRoom.ToLower() == roomType);
-            foreach (var room in result)
-            {
-                RoomsOnFloor.Add(room);
-            }
-            
-        }
-
-        public void PrintAddedRooms()
+        public void ShowFloors()
         {
-            foreach (var room in RoomsOnFloor)
+            foreach (var floor in FloorList)
             {
-                Console.WriteLine(room.typeOfRoom);
-            }
-        }
-
-        public void PrintAvailibleRooms()
-        {
-            foreach (var room in Rooms)
-            {
-                Console.WriteLine(room.typeOfRoom);
-            }
-        }
-
-        public void FurbishHouse(House house)
-        {
-            while (true)
-            {
-                Console.WriteLine("What floor do you want to furbish?");
-                Console.WriteLine("1. First Floor");
-                Console.WriteLine("2. Secound Floor");
-                Console.WriteLine("3. exit");
-                var Floor = Console.ReadLine();
-                switch (Floor)
-                {
-                    case "1":
-                        room.FurnishRoom("First Floor"), RoomsOnFloor);
-                        break;
-                    case "2":
-                        break;
-                    case "3":
-                        break;
-                    default:
-                        Console.WriteLine("Please choose a valid option!");
-                        break;
-                }
-
+                Console.WriteLine(floor.FloorLevel);
             }
         }
 
